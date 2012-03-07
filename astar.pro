@@ -4,5 +4,4 @@ HEADERS += \
 
 SOURCES += \
 #    astar.cpp \
-    test.cpp \
-    qastar.cpp
+    test.cpp

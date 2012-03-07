@@ -32,16 +32,18 @@ public:
     {
     }
 
-    QList<Node> findPath(Node start, Node goal)
+    QList<Node> findPath(const Node &start, const Node &goal)
     {
         QSet<Node> closedset;
         QSet<Node> openset;
         QHash<Node, NodeInfo> infos;
 
-        int h = heuristicCostEstimate(start, goal);
-        infos[start] = NodeInfo(0, h, start);
+        {
+            int h = heuristicCostEstimate(start, goal);
+            infos[start] = NodeInfo(0, h, start);
 
-        openset.insert(start);
+            openset.insert(start);
+        }
 
         while (!openset.isEmpty()) {
             Node current = bestFromOpenSet(openset, infos);
@@ -77,7 +79,7 @@ public:
         return QList<Node>();
     }
 
-    Node bestFromOpenSet(QSet<Node> &openset, QHash<Node, NodeInfo> &infos)
+    Node bestFromOpenSet(const QSet<Node> &openset, const QHash<Node, NodeInfo> &infos)
     {
         QSetIterator<Node> i(openset);
         Node current = i.next();
@@ -96,7 +98,7 @@ public:
         return bestNode;
     }
 
-    QList<Node> reconstructPath(Node current, QHash<Node, NodeInfo> &infos)
+    QList<Node> reconstructPath(const Node &current, const QHash<Node, NodeInfo> &infos)
     {
         Node comeFrom = infos[current].comeFrom;
 
